@@ -1,5 +1,5 @@
 #include "Indicators.h"
-#include "hardware_hal.h"
+#include "../../../src/hardware_hal.h"
 
 void Indicators::red()   { set(255, 0, 0); }
 void Indicators::green() { set(0, 255, 0); }
