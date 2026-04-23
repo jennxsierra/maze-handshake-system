@@ -2,8 +2,7 @@
 #include <Arduino.h>
 
 // Thin C-style HAL so logic never touches device classes directly.
-namespace Hardware
-{
+namespace Hardware {
     void initBle(long baud);
     bool bleAvailable();
     char bleRead();
