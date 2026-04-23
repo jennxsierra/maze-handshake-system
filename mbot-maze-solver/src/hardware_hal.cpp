@@ -7,9 +7,9 @@ namespace
     MeRGBLed g_led{PORT_6};
     constexpr uint8_t LED_COUNT{4};
 
-    // Motors
-    MeMegaPiDCMotor g_left{PORT1B};
-    MeMegaPiDCMotor g_right{PORT2A};
+    // Motors (MegaPi onboard motor channels)
+    MeMegaPiDCMotor g_left{PORT3B};
+    MeMegaPiDCMotor g_right{PORT2B};
 
     // Ultrasonic
     MeUltrasonicSensor g_sonar{PORT_7};
