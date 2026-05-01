@@ -42,8 +42,8 @@ private:
     int wallDetectionCounter{ 0 };
     
     static constexpr int ISLAND_DETECTION_THRESHOLD{ 4 };
-    static constexpr int RIGHT_OPENING_THRESHOLD{ 18 };
-    static constexpr int RIGHT_WALL_TARGET{ 6 };
+    static constexpr int RIGHT_OPENING_THRESHOLD{ 25 };
+    static constexpr int RIGHT_WALL_TARGET{ 7 };
     static constexpr float PROPORTIONAL_GAIN{ 3.0f };
 
     // Helper Methods
