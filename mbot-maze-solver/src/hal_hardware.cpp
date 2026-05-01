@@ -22,10 +22,10 @@ void hal_motor_set(int leftSpeed, int rightSpeed) {
 }
 
 /* Ultrasonic sensor configuration */
-MeUltrasonicSensor gSonar{ PORT_7 };
+MeUltrasonicSensor gUltrasonic{ PORT_7 };
 
 uint16_t hal_sonar_cm() {
-    return gSonar.distanceCm();
+    return gUltrasonic.distanceCm();
 }
 
 /* Line follower configuration */
