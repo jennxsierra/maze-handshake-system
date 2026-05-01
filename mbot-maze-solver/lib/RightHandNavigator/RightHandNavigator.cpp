@@ -18,7 +18,7 @@ void RightHandNavigator::update() {
     switch (currentState) {
     case State::NORMAL: {
         // Right opening detected - execute right turn sequence.
-        if (!rightWallOpen && !rightTurnCooldown) {
+        if (rightWallOpen && !rightTurnCooldown) {
             wallDetectionCounter = 0;
             rightTurnCooldown = true;
 
@@ -66,7 +66,7 @@ void RightHandNavigator::update() {
 
     case State::ISLAND: {
         // Right opening in island mode - execute right turn sequence.
-        if (!rightWallOpen && !rightTurnCooldown) {
+        if (rightWallOpen && !rightTurnCooldown) {
             rightTurnCooldown = true;
 
             ble.writeText("[ISLAND] turning right\n");
@@ -124,25 +124,25 @@ void RightHandNavigator::setIslandState() {
 
 // Offset compensation after detecting sensor position on right turn.
 void RightHandNavigator::compensateForSensorOffset() {
-    drive.forward();
+    drive.forward(80);
     delay(725);
 }
 
 // Offset compensation after completing a right turn.
 void RightHandNavigator::compensateForTurnOffset() {
-    drive.forward();
+    drive.forward(80);
     delay(725);
 }
 
 // Offset compensation after completing a 180-degree turn.
 void RightHandNavigator::compensateFor180TurnOffset() {
-    drive.forward();
+    drive.forward(80);
     delay(1000);
 }
 
 // Reverse slightly to avoid wall contact during turns.
 void RightHandNavigator::retreatFromWall() {
-    drive.backward();
+    drive.backward(80);
     delay(200);
 }
 
