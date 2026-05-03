@@ -34,6 +34,7 @@ private:
   Mode mode_;
   bool insideMode_;
   bool turned_;
+  int islandEntryChecksRemaining_;
   bool completed_;
   int consecutiveLeftTurns_;
 };

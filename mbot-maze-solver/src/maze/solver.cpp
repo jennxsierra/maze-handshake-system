@@ -10,6 +10,7 @@ MazeSolver::MazeSolver(RobotHardware &hardware, DriveBase &drive)
       mode_(Mode::Autonomous),
       insideMode_(false),
       turned_(false),
+      islandEntryChecksRemaining_(0),
       completed_(false),
       consecutiveLeftTurns_(0) {}
 
@@ -27,6 +28,7 @@ void MazeSolver::update() {
     drive.turnAround();
     turned_ = true;
     insideMode_ = true;
+    islandEntryChecksRemaining_ = 2;
     drive.moveForward();
     delay(config::kPauseIslandSettleMs);
   }
@@ -131,6 +133,14 @@ void MazeSolver::basicMovement(uint8_t front, double rightDistanceCm, bool right
 }
 
 void MazeSolver::islandMovement(uint8_t front, double rightDistanceCm, bool rightBlocked) {
+  if (islandEntryChecksRemaining_ > 0) {
+    islandEntryChecksRemaining_--;
+    if (!rightBlocked) {
+      drive.moveForward();
+      return;
+    }
+  }
+
   if (front != 0) {
     markCompleted();
     return;
