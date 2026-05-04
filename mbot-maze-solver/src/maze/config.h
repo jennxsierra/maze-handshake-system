@@ -18,8 +18,8 @@ constexpr unsigned long kPauseTurnAroundSpinMs = 260;
 constexpr double kRightBlockedMinCm = 2.0;
 constexpr double kRightBlockedMaxCm = 12.0;
 
-constexpr double kTooCloseStrongCm = 3.5;
-constexpr double kTooCloseLightCm = 4.5;
+constexpr double kTooCloseStrongCm = 4.5;
+constexpr double kTooCloseLightCm = 5;
 constexpr double kTooFarLightLowCm = 5.5;
 constexpr double kTooFarLightHighCm = 7.0;
 constexpr double kTooFarStrongLowCm = 7.0;
