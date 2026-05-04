@@ -2,18 +2,18 @@
 
 #include <Arduino.h>
 
-#include "maze/solver.h"
+#include "maze/command_parser.h"
 
 namespace maze {
 
 class SerialCommandRouter {
 public:
-  explicit SerialCommandRouter(MazeSolver &solver);
+  explicit SerialCommandRouter(CommandParser &parser);
 
   void update();
 
 private:
-  MazeSolver &solver;
+  CommandParser &parser;
 };
 
 } // namespace maze

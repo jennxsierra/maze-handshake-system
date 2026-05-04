@@ -17,7 +17,6 @@ var Registry = map[byte]Entry{
 	'2': {Code: '2', Help: "Nudge robot right"},
 	'S': {Code: 'S', Help: "Stop the robot"},
 	'A': {Code: 'A', Help: "Switch robot to autonomous mode"},
-	'I': {Code: 'I', Help: "Switch robot to autonomous island mode"},
 	'M': {Code: 'M', Help: "Return robot to manual mode"},
 }
 
@@ -32,7 +31,6 @@ var KeyboardLayout = []byte{
 	'2',
 	'S',
 	'A',
-	'I',
 	'M',
 }
 
@@ -46,7 +44,6 @@ var PadBindings = map[string]byte{
 	"lefttrigger":   '1',
 	"righttrigger":  '2',
 	"start":         'A',
-	"misc1":         'I',
 	"back":          'M',
 }
 
@@ -60,7 +57,6 @@ var PadLabels = map[string]string{
 	"lefttrigger":   "Left Trigger",
 	"righttrigger":  "Right Trigger",
 	"start":         "Start Button",
-	"misc1":         "Heart Button",
 	"back":          "Back Button",
 }
 
@@ -74,6 +70,5 @@ var PadLayout = []string{
 	"lefttrigger",
 	"righttrigger",
 	"start",
-	"misc1",
 	"back",
 }

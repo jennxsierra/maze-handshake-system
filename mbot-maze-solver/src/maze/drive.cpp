@@ -33,6 +33,27 @@ void DriveBase::moveRight() {
   hardware.runRightMotor(-config::kBaseSpeed);
 }
 
+void DriveBase::turnRight() {
+  Serial.println("[MOTOR] TURN RIGHT");
+  // mirror of runTurnSequence but inverted motors
+  stop();
+  delay(config::kPauseShortMs);
+
+  hardware.runLeftMotor(config::kBaseSpeed);
+  hardware.runRightMotor(-config::kBaseSpeed);
+  delay(config::kPauseTurnMs);
+
+  stop();
+  delay(config::kPauseShortMs);
+
+  hardware.runLeftMotor(config::kBaseSpeed * 3.5);
+  hardware.runRightMotor(config::kBaseSpeed * 3.5);
+  delay(config::kPauseSpinMs);
+
+  stop();
+  delay(config::kPauseLongMs);
+}
+
 void DriveBase::turnAround() {
   Serial.println("[MOTOR] TURN AROUND");
   runTurnSequence(config::kPauseTurnAroundTurnMs, config::kPauseTurnAroundSpinMs);
@@ -91,5 +112,7 @@ void DriveBase::readjustRightwardsVeryStrong() {
   hardware.runLeftMotor(config::kBaseSpeed + 48);
   hardware.runRightMotor(-config::kBaseSpeed);
 }
+
+
 
 } // namespace maze

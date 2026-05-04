@@ -15,12 +15,14 @@ public:
   void moveBackward();
   void turnLeft();
   void moveRight();
+  void turnRight();
   void turnAround();
   void readjustLeftwards();
   void readjustLeftwardsStrong();
   void readjustRightwards();
   void readjustRightwardsStrong();
   void readjustRightwardsVeryStrong();
+  
 
 private:
   void runTurnSequence(unsigned long turnDelayMs, unsigned long spinDelayMs);

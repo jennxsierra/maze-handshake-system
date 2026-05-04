@@ -22,8 +22,6 @@ public:
   Mode mode() const;
   bool isCompleted() const;
 
-  void handleCommand(char command);
-
 private:
   void basicMovement(uint8_t front, double rightDistanceCm, bool rightBlocked);
   void islandMovement(uint8_t front, double rightDistanceCm, bool rightBlocked);

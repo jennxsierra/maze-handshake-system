@@ -7,7 +7,7 @@ namespace maze {
 MazeSolver::MazeSolver(RobotHardware &hardware, DriveBase &drive)
     : hardware(hardware),
       drive(drive),
-      mode_(Mode::Autonomous),
+      mode_(Mode::Manual),
       insideMode_(false),
       turned_(false),
       islandEntryChecksRemaining_(0),
@@ -57,46 +57,6 @@ MazeSolver::Mode MazeSolver::mode() const {
 
 bool MazeSolver::isCompleted() const {
   return completed_;
-}
-
-void MazeSolver::handleCommand(char command) {
-  switch (command) {
-  case 'A':
-    setMode(Mode::Autonomous);
-    break;
-  case 'M':
-    setMode(Mode::Manual);
-    break;
-  case 'S':
-    drive.stop();
-    break;
-  case 'F':
-    setMode(Mode::Manual);
-    drive.moveForward();
-    break;
-  case 'B':
-    setMode(Mode::Manual);
-    drive.moveBackward();
-    break;
-  case 'L':
-    setMode(Mode::Manual);
-    drive.turnLeft();
-    break;
-  case 'R':
-    setMode(Mode::Manual);
-    drive.moveRight();
-    break;
-  case '1':
-    setMode(Mode::Manual);
-    drive.readjustLeftwards();
-    break;
-  case '2':
-    setMode(Mode::Manual);
-    drive.readjustRightwards();
-    break;
-  default:
-    break;
-  }
 }
 
 void MazeSolver::basicMovement(uint8_t front, double rightDistanceCm, bool rightBlocked) {

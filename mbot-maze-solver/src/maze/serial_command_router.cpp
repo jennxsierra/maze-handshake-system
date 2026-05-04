@@ -2,7 +2,7 @@
 
 namespace maze {
 
-SerialCommandRouter::SerialCommandRouter(MazeSolver &solver) : solver(solver) {}
+SerialCommandRouter::SerialCommandRouter(CommandParser &parser) : parser(parser) {}
 
 void SerialCommandRouter::update() {
   while (Serial.available() > 0) {
@@ -12,7 +12,7 @@ void SerialCommandRouter::update() {
       continue;
     }
 
-    solver.handleCommand(command);
+    parser.parseCommand(command);
   }
 }
 
