@@ -114,6 +114,41 @@ void MazeSolver::basicMovement(uint8_t front, double rightDistanceCm, bool right
     return;
   }
 
+  applyWallFollowAdjustment(rightDistanceCm);
+}
+
+void MazeSolver::islandMovement(uint8_t front, double rightDistanceCm, bool rightBlocked) {
+  if (islandEntryChecksRemaining_ > 0) {
+    islandEntryChecksRemaining_--;
+
+    if (!rightBlocked) {
+      if (shouldAggressiveIslandRecentering(rightDistanceCm)) {
+        drive.readjustRightwardsVeryStrong();
+      } else {
+        drive.moveForward();
+      }
+      return;
+    }
+
+    applyIslandEntryStabilization(rightDistanceCm);
+    return;
+  }
+
+  if (front != 0) {
+    markCompleted();
+    return;
+  }
+
+  if (!rightBlocked) {
+    consecutiveLeftTurns_ = 0;
+    drive.moveRight();
+    return;
+  }
+
+  applyWallFollowAdjustment(rightDistanceCm);
+}
+
+void MazeSolver::applyWallFollowAdjustment(double rightDistanceCm) {
   if (rightDistanceCm <= config::kTooCloseStrongCm) {
     drive.readjustLeftwardsStrong();
   } else if (rightDistanceCm <= config::kTooCloseLightCm) {
@@ -132,69 +167,20 @@ void MazeSolver::basicMovement(uint8_t front, double rightDistanceCm, bool right
   }
 }
 
-void MazeSolver::islandMovement(uint8_t front, double rightDistanceCm, bool rightBlocked) {
-  if (islandEntryChecksRemaining_ > 0) {
-    // During initial checks after entering the island we need to handle
-    // two cases:
-    // 1) A real opening exists immediately -> move forward.
-    // 2) No opening, but the robot is too far from the right wall after the
-    //    turn -> aggressively readjust rightwards so subsequent readings
-    //    correctly detect the wall and avoid false positives.
-    islandEntryChecksRemaining_--;
-
-    if (!rightBlocked) {
-      if (rightDistanceCm > config::kTooFarVeryStrongLowCm) {
-        // Too far from the right wall after the turn; nudge rightwards hard
-        // so we can sense the wall reliably on the next updates.
-        drive.readjustRightwardsVeryStrong();
-      } else {
-        // Likely a genuine opening; proceed forward into it.
-        drive.moveForward();
-      }
-      return;
-    }
-
-    // During entry checks, never idle: keep issuing a stabilizing command
-    // while we re-lock to the right wall.
-    if (rightDistanceCm <= config::kTooCloseStrongCm) {
-      drive.readjustLeftwardsStrong();
-    } else if (rightDistanceCm <= config::kTooCloseLightCm) {
-      drive.readjustLeftwards();
-    } else if (rightDistanceCm > config::kTooFarStrongLowCm) {
-      drive.readjustRightwardsStrong();
-    } else {
-      drive.moveForward();
-    }
-    return;
-  }
-
-  if (front != 0) {
-    markCompleted();
-    return;
-  }
-
-  if (!rightBlocked) {
-    consecutiveLeftTurns_ = 0;
-    drive.moveRight();
-    return;
-  }
-
+void MazeSolver::applyIslandEntryStabilization(double rightDistanceCm) {
   if (rightDistanceCm <= config::kTooCloseStrongCm) {
     drive.readjustLeftwardsStrong();
   } else if (rightDistanceCm <= config::kTooCloseLightCm) {
     drive.readjustLeftwards();
-  } else if (rightDistanceCm >= config::kTooFarLightLowCm &&
-             rightDistanceCm <= config::kTooFarLightHighCm) {
-    drive.readjustRightwards();
-  } else if (rightDistanceCm > config::kTooFarStrongLowCm &&
-             rightDistanceCm <= config::kTooFarStrongHighCm) {
+  } else if (rightDistanceCm > config::kTooFarStrongLowCm) {
     drive.readjustRightwardsStrong();
-  } else if (rightDistanceCm > config::kTooFarVeryStrongLowCm &&
-             rightDistanceCm <= config::kTooFarVeryStrongHighCm) {
-    drive.readjustRightwardsVeryStrong();
   } else {
     drive.moveForward();
   }
+}
+
+bool MazeSolver::shouldAggressiveIslandRecentering(double rightDistanceCm) const {
+  return rightDistanceCm > config::kTooFarVeryStrongLowCm;
 }
 
 void MazeSolver::markCompleted() {

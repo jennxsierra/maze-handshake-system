@@ -23,6 +23,8 @@ public:
   void readjustRightwardsVeryStrong();
 
 private:
+  void runTurnSequence(unsigned long turnDelayMs, unsigned long spinDelayMs);
+
   RobotHardware &hardware;
 };
 

@@ -24,22 +24,7 @@ void DriveBase::moveBackward() {
 
 void DriveBase::turnLeft() {
   Serial.println("[MOTOR] TURN LEFT");
-  stop();
-  delay(config::kPauseShortMs);
-
-  hardware.runLeftMotor(-config::kBaseSpeed);
-  hardware.runRightMotor(config::kBaseSpeed);
-  delay(config::kPauseTurnMs);
-
-  stop();
-  delay(config::kPauseShortMs);
-
-  hardware.runLeftMotor(-config::kBaseSpeed * 3.5);
-  hardware.runRightMotor(-config::kBaseSpeed * 3.5);
-  delay(config::kPauseSpinMs);
-
-  stop();
-  delay(config::kPauseLongMs);
+  runTurnSequence(config::kPauseTurnMs, config::kPauseSpinMs);
 }
 
 void DriveBase::moveRight() {
@@ -50,27 +35,31 @@ void DriveBase::moveRight() {
 
 void DriveBase::turnAround() {
   Serial.println("[MOTOR] TURN AROUND");
+  runTurnSequence(config::kPauseTurnAroundTurnMs, config::kPauseTurnAroundSpinMs);
+
+  readjustRightwardsVeryStrong();
+  delay(config::kPauseIslandEntryMs);
+  moveForward();
+  delay(config::kPauseMediumMs);
+}
+
+void DriveBase::runTurnSequence(unsigned long turnDelayMs, unsigned long spinDelayMs) {
   stop();
   delay(config::kPauseShortMs);
 
   hardware.runLeftMotor(-config::kBaseSpeed);
   hardware.runRightMotor(config::kBaseSpeed);
-  delay(config::kPauseTurnAroundTurnMs);
+  delay(turnDelayMs);
 
   stop();
   delay(config::kPauseShortMs);
 
   hardware.runLeftMotor(-config::kBaseSpeed * 3.5);
   hardware.runRightMotor(-config::kBaseSpeed * 3.5);
-  delay(config::kPauseTurnAroundSpinMs);
+  delay(spinDelayMs);
 
   stop();
   delay(config::kPauseLongMs);
-
-  readjustRightwardsVeryStrong();
-  delay(config::kPauseIslandEntryMs);
-  moveForward();
-  delay(config::kPauseMediumMs);
 }
 
 void DriveBase::readjustLeftwards() {

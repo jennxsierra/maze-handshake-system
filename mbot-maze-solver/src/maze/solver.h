@@ -27,6 +27,9 @@ public:
 private:
   void basicMovement(uint8_t front, double rightDistanceCm, bool rightBlocked);
   void islandMovement(uint8_t front, double rightDistanceCm, bool rightBlocked);
+  void applyWallFollowAdjustment(double rightDistanceCm);
+  void applyIslandEntryStabilization(double rightDistanceCm);
+  bool shouldAggressiveIslandRecentering(double rightDistanceCm) const;
   void markCompleted();
 
   RobotHardware &hardware;
