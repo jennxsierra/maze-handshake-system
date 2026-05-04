@@ -57,19 +57,19 @@ void DriveBase::turnAround() {
 }
 
 void DriveBase::readjustLeftwards() {
-  Serial.println("[MOTOR] READJUST RIGHT");
+  Serial.println("[MOTOR] READJUST LEFT");
   hardware.runLeftMotor(config::kBaseSpeed);
   hardware.runRightMotor(-config::kBaseSpeed - 20);
 }
 
 void DriveBase::readjustLeftwardsStrong() {
-  Serial.println("[MOTOR] READJUST RIGHT STRONG");
+  Serial.println("[MOTOR] READJUST LEFT STRONG");
   hardware.runLeftMotor(config::kBaseSpeed);
   hardware.runRightMotor(-config::kBaseSpeed - 40);
 }
 
 void DriveBase::readjustRightwards() {
-  Serial.println("[MOTOR] READJUST LEFT");
+  Serial.println("[MOTOR] READJUST RIGHT");
   hardware.runLeftMotor(config::kBaseSpeed + 20);
   hardware.runRightMotor(-config::kBaseSpeed);
 }
@@ -81,7 +81,7 @@ void DriveBase::readjustRightwardsStrong() {
 }
 
 void DriveBase::readjustRightwardsVeryStrong() {
-  Serial.println("[MOTOR] READJUST LEFT VERY STRONG");
+  Serial.println("[MOTOR] READJUST RIGHT VERY STRONG");
   hardware.runLeftMotor(config::kBaseSpeed + 48);
   hardware.runRightMotor(-config::kBaseSpeed);
 }
