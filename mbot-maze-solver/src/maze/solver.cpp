@@ -25,11 +25,11 @@ void MazeSolver::update() {
   }
 
   if (consecutiveLeftTurns_ == 4 && !turned_) {
+    hardware.setStatusColor(0, 0, 255);
     drive.turnAround();
     turned_ = true;
     insideMode_ = true;
     islandEntryChecksRemaining_ = 2;
-    drive.moveForward();
     delay(config::kPauseIslandSettleMs);
   }
 
@@ -134,11 +134,38 @@ void MazeSolver::basicMovement(uint8_t front, double rightDistanceCm, bool right
 
 void MazeSolver::islandMovement(uint8_t front, double rightDistanceCm, bool rightBlocked) {
   if (islandEntryChecksRemaining_ > 0) {
+    // During initial checks after entering the island we need to handle
+    // two cases:
+    // 1) A real opening exists immediately -> move forward.
+    // 2) No opening, but the robot is too far from the right wall after the
+    //    turn -> aggressively readjust rightwards so subsequent readings
+    //    correctly detect the wall and avoid false positives.
     islandEntryChecksRemaining_--;
+
     if (!rightBlocked) {
-      drive.moveForward();
+      if (rightDistanceCm > config::kTooFarVeryStrongLowCm) {
+        // Too far from the right wall after the turn; nudge rightwards hard
+        // so we can sense the wall reliably on the next updates.
+        drive.readjustRightwardsVeryStrong();
+      } else {
+        // Likely a genuine opening; proceed forward into it.
+        drive.moveForward();
+      }
       return;
     }
+
+    // During entry checks, never idle: keep issuing a stabilizing command
+    // while we re-lock to the right wall.
+    if (rightDistanceCm <= config::kTooCloseStrongCm) {
+      drive.readjustLeftwardsStrong();
+    } else if (rightDistanceCm <= config::kTooCloseLightCm) {
+      drive.readjustLeftwards();
+    } else if (rightDistanceCm > config::kTooFarStrongLowCm) {
+      drive.readjustRightwardsStrong();
+    } else {
+      drive.moveForward();
+    }
+    return;
   }
 
   if (front != 0) {

@@ -7,9 +7,11 @@ constexpr int kBaseSpeed = 60;
 
 constexpr unsigned long kPauseShortMs = 50;
 constexpr unsigned long kPauseMediumMs = 100;
-constexpr unsigned long kPauseTurnMs = 220;
+constexpr unsigned long kPauseTurnMs = 200;
+constexpr unsigned long kPauseTurnAroundTurnMs = 200;
+constexpr unsigned long kPauseTurnAroundSpinMs = 240;
 constexpr unsigned long kPauseLongMs = 150;
-constexpr unsigned long kPauseSpinMs = 260;
+constexpr unsigned long kPauseSpinMs = 240;
 constexpr unsigned long kPauseIslandEntryMs = 800;
 constexpr unsigned long kPauseIslandSettleMs = 1000;
 
