@@ -2,9 +2,6 @@
 
 namespace maze
 {
-  BleCommandRouter::BleCommandRouter(CommandParser &parser, HardwareSerial &rxSerial)
-      : parser(parser), rxSerial(rxSerial) {}
-
   // Constructor stores references to the parser and the BLE UART instance.
   BleCommandRouter::BleCommandRouter(CommandParser &parser, HardwareSerial &rxSerial)
       : parser(parser), rxSerial(rxSerial) {}
