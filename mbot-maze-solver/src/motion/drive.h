@@ -18,11 +18,11 @@ public:
   void moveRight();
   void turnRight();
   void turnAround();
-  void readjustLeftwards();
-  void readjustLeftwardsStrong();
-  void readjustRightwards();
-  void readjustRightwardsStrong();
-  void readjustRightwardsVeryStrong();
+  void adjustLeft();
+  void adjustLeftStrong();
+  void adjustRight();
+  void adjustRightStrong();
+  void adjustRightVeryStrong();
 
 private:
   void runTurnSequence(unsigned long turnDelayMs, unsigned long spinDelayMs);

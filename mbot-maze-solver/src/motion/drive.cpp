@@ -68,7 +68,7 @@ void DriveBase::turnAround() {
   runTurnSequence(config::kPauseTurnAroundTurnMs, config::kPauseTurnAroundSpinMs);
 
   // Readjust strongly to wall before moving forward.
-  readjustRightwardsVeryStrong();
+  adjustRightVeryStrong();
   delay(config::kPauseIslandEntryMs);
   moveForward();
   delay(config::kPauseMediumMs);
@@ -97,35 +97,35 @@ void DriveBase::runTurnSequence(unsigned long turnDelayMs, unsigned long spinDel
 }
 
 // Light leftward adjustment while maintaining forward momentum.
-void DriveBase::readjustLeftwards() {
+void DriveBase::adjustLeft() {
   Serial.println("[MOTOR] READJUST LEFT");
   hardware.runLeftMotor(config::kBaseSpeed);
   hardware.runRightMotor(-config::kBaseSpeed - 20);
 }
 
 // Strong leftward adjustment.
-void DriveBase::readjustLeftwardsStrong() {
+void DriveBase::adjustLeftStrong() {
   Serial.println("[MOTOR] READJUST LEFT STRONG");
   hardware.runLeftMotor(config::kBaseSpeed);
   hardware.runRightMotor(-config::kBaseSpeed - 40);
 }
 
 // Light rightward adjustment (wall-following).
-void DriveBase::readjustRightwards() {
+void DriveBase::adjustRight() {
   Serial.println("[MOTOR] READJUST RIGHT");
   hardware.runLeftMotor(config::kBaseSpeed + 22);
   hardware.runRightMotor(-config::kBaseSpeed);
 }
 
 // Strong rightward adjustment.
-void DriveBase::readjustRightwardsStrong() {
+void DriveBase::adjustRightStrong() {
   Serial.println("[MOTOR] READJUST RIGHT STRONG");
   hardware.runLeftMotor(config::kBaseSpeed + 35);
   hardware.runRightMotor(-config::kBaseSpeed);
 }
 
 // Very strong rightward adjustment (for island entry/recovery).
-void DriveBase::readjustRightwardsVeryStrong() {
+void DriveBase::adjustRightVeryStrong() {
   Serial.println("[MOTOR] READJUST RIGHT VERY STRONG");
   hardware.runLeftMotor(config::kBaseSpeed + 48);
   hardware.runRightMotor(-config::kBaseSpeed);

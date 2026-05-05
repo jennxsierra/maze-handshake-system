@@ -82,7 +82,7 @@ void MazeSolver::islandMovement(uint8_t front, double rightDistanceCm, bool righ
 
     if (!rightBlocked) {
       if (shouldAggressiveIslandRecentering(rightDistanceCm)) {
-        drive.readjustRightwardsVeryStrong();
+        drive.adjustRightVeryStrong();
       } else {
         drive.moveForward();
       }
@@ -109,18 +109,18 @@ void MazeSolver::islandMovement(uint8_t front, double rightDistanceCm, bool righ
 
 void MazeSolver::applyWallFollowAdjustment(double rightDistanceCm) {
   if (rightDistanceCm <= config::kTooCloseStrongCm) {
-    drive.readjustLeftwardsStrong();
+    drive.adjustLeftStrong();
   } else if (rightDistanceCm <= config::kTooCloseLightCm) {
-    drive.readjustLeftwards();
+    drive.adjustLeft();
   } else if (rightDistanceCm >= config::kTooFarLightLowCm &&
              rightDistanceCm <= config::kTooFarLightHighCm) {
-    drive.readjustRightwards();
+    drive.adjustRight();
   } else if (rightDistanceCm > config::kTooFarStrongLowCm &&
              rightDistanceCm <= config::kTooFarStrongHighCm) {
-    drive.readjustRightwardsStrong();
+    drive.adjustRightStrong();
   } else if (rightDistanceCm > config::kTooFarVeryStrongLowCm &&
              rightDistanceCm <= config::kTooFarVeryStrongHighCm) {
-    drive.readjustRightwardsVeryStrong();
+    drive.adjustRightVeryStrong();
   } else {
     drive.moveForward();
   }
@@ -128,11 +128,11 @@ void MazeSolver::applyWallFollowAdjustment(double rightDistanceCm) {
 
 void MazeSolver::applyIslandEntryStabilization(double rightDistanceCm) {
   if (rightDistanceCm <= config::kTooCloseStrongCm) {
-    drive.readjustLeftwardsStrong();
+    drive.adjustLeftStrong();
   } else if (rightDistanceCm <= config::kTooCloseLightCm) {
-    drive.readjustLeftwards();
+    drive.adjustLeft();
   } else if (rightDistanceCm > config::kTooFarStrongLowCm) {
-    drive.readjustRightwardsStrong();
+    drive.adjustRightStrong();
   } else {
     drive.moveForward();
   }
