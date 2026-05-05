@@ -66,6 +66,15 @@ namespace maze
     {
       drive.stop();
     }
+    else if (mode_ == Mode::Autonomous)
+    {
+      // Allow re-entering autonomous mode after completion by clearing
+      // the completed flag and resetting transient navigation state.
+      completed_ = false;
+      insideMode_ = false;
+      turned_ = false;
+      consecutiveLeftTurns_ = 0;
+    }
   }
 
   // Return current solver mode.
@@ -236,6 +245,7 @@ namespace maze
     drive.stop();
     hardware.setStatusColor(0, 255, 0);
     completed_ = true;
+    mode_ = Mode::Manual;
     Serial.println("===== MAZE COMPLETED =====");
   }
 }
