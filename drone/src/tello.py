@@ -43,7 +43,16 @@ class TelloClient:
         while self.running:
             try:
                 data, _ = self.cmd_socket.recvfrom(1024)
-                self.last_response = data.decode("utf-8").strip()
+                try:
+                    self.last_response = data.decode("utf-8").strip()
+                except UnicodeDecodeError:
+                    # Fallback to a permissive decode to avoid crashing the thread.
+                    try:
+                        self.last_response = data.decode("latin-1").strip()
+                    except Exception:
+                        self.last_response = data.decode(
+                            "utf-8", errors="replace"
+                        ).strip()
             except socket.timeout:
                 continue
             except OSError:
@@ -53,8 +62,16 @@ class TelloClient:
         while self.running:
             try:
                 data, _ = self.state_socket.recvfrom(2048)
-                state_raw = data.decode("utf-8").strip()
-                self.latest_state = self._parse_state(state_raw)
+                try:
+                    state_raw = data.decode("utf-8").strip()
+                except UnicodeDecodeError:
+                    try:
+                        state_raw = data.decode("latin-1").strip()
+                    except Exception:
+                        state_raw = data.decode("utf-8", errors="replace").strip()
+
+                if state_raw:
+                    self.latest_state = self._parse_state(state_raw)
             except socket.timeout:
                 continue
             except OSError:
