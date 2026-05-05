@@ -43,45 +43,45 @@ namespace maze
   void ManualController::pivotLeft90()
   {
     stop();
-    delay(config::kPauseShortMs);
+    delay(config::kPauseShort);
 
     // Turn left.
-    hardware.runLeftMotor(-config::kBaseSpeed);
-    hardware.runRightMotor(config::kBaseSpeed);
-    delay(config::kPauseTurnMs);
+    hardware.runLeftMotor(-config::kSpeed);
+    hardware.runRightMotor(config::kSpeed);
+    delay(config::kPauseTurn);
 
     stop();
-    delay(config::kPauseShortMs);
+    delay(config::kPauseShort);
 
     // Spin to complete 90°.
-    hardware.runLeftMotor(-config::kBaseSpeed * 3.6);
-    hardware.runRightMotor(-config::kBaseSpeed * 3.6);
-    delay(config::kPauseSpinMs);
+    hardware.runLeftMotor(-config::kSpeed * 3.6);
+    hardware.runRightMotor(-config::kSpeed * 3.6);
+    delay(config::kPauseSpin);
 
     stop();
-    delay(config::kPauseLongMs);
+    delay(config::kPauseLong);
   }
 
   // Executes exact 90° right pivot.
   void ManualController::pivotRight90()
   {
     stop();
-    delay(config::kPauseShortMs);
+    delay(config::kPauseShort);
 
     // Turn right.
-    hardware.runLeftMotor(config::kBaseSpeed);
-    hardware.runRightMotor(-config::kBaseSpeed);
-    delay(config::kPauseTurnMs);
+    hardware.runLeftMotor(config::kSpeed);
+    hardware.runRightMotor(-config::kSpeed);
+    delay(config::kPauseTurn);
 
     stop();
-    delay(config::kPauseShortMs);
+    delay(config::kPauseShort);
 
     // Spin to complete 90°.
-    hardware.runLeftMotor(config::kBaseSpeed * 3.5);
-    hardware.runRightMotor(config::kBaseSpeed * 3.5);
-    delay(config::kPauseSpinMs);
+    hardware.runLeftMotor(config::kSpeed * 3.5);
+    hardware.runRightMotor(config::kSpeed * 3.5);
+    delay(config::kPauseSpin);
 
     stop();
-    delay(config::kPauseLongMs);
+    delay(config::kPauseLong);
   }
 }

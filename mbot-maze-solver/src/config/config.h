@@ -1,31 +1,36 @@
 #pragma once
 
-namespace maze {
-namespace config {
+namespace maze
+{
+    namespace config
+    {
+        // Core drive settings
+        constexpr int kSpeed = 60; // base motor speed
 
-constexpr int kBaseSpeed = 60;
+        // Timing (milliseconds)
+        constexpr unsigned long kPauseShort = 50;           // short, per-action pause
+        constexpr unsigned long kPauseTurn = 210;           // initial turn duration
+        constexpr unsigned long kPauseSpin = 250;           // spin to complete turn
+        constexpr unsigned long kPauseTurnAroundTurn = 220; // turnaround initial turn
+        constexpr unsigned long kPauseTurnAroundSpin = 260; // turnaround spin
+        constexpr unsigned long kPauseMedium = 100;         // medium pause
+        constexpr unsigned long kPauseLong = 150;           // long pause
+        constexpr unsigned long kPauseIslandEntry = 800;    // wait after island entry
+        constexpr unsigned long kPauseIslandSettle = 1000;  // extra settle time on island
 
-constexpr unsigned long kPauseShortMs = 50;
-constexpr unsigned long kPauseMediumMs = 100;
-constexpr unsigned long kPauseLongMs = 150;
-constexpr unsigned long kPauseIslandEntryMs = 800;
-constexpr unsigned long kPauseIslandSettleMs = 1000;
-constexpr unsigned long kPauseTurnMs = 210;
-constexpr unsigned long kPauseSpinMs = 250;
-constexpr unsigned long kPauseTurnAroundTurnMs = 220;
-constexpr unsigned long kPauseTurnAroundSpinMs = 260;
+        // Right-side distance thresholds (cm)
+        constexpr double kRightMinCm = 2.0;  // sensor min considered
+        constexpr double kRightMaxCm = 12.0; // sensor max considered for blocked
 
-constexpr double kRightBlockedMinCm = 2.0;
-constexpr double kRightBlockedMaxCm = 12.0;
+        // Wall-following distance bands (cm)
+        constexpr double kCloseStrongCm = 4.5;        // too close (strong adjust)
+        constexpr double kCloseLightCm = 5.0;         // slightly close (light adjust)
+        constexpr double kFarLightLowCm = 5.5;        // slightly far lower bound
+        constexpr double kFarLightHighCm = 7.0;       // slightly far upper bound
+        constexpr double kFarStrongLowCm = 7.0;       // far strong lower bound
+        constexpr double kFarStrongHighCm = 8.5;      // far strong upper bound
+        constexpr double kFarVeryStrongLowCm = 8.5;   // very far lower bound
+        constexpr double kFarVeryStrongHighCm = 12.0; // very far upper bound
 
-constexpr double kTooCloseStrongCm = 4.5;
-constexpr double kTooCloseLightCm = 5;
-constexpr double kTooFarLightLowCm = 5.5;
-constexpr double kTooFarLightHighCm = 7.0;
-constexpr double kTooFarStrongLowCm = 7.0;
-constexpr double kTooFarStrongHighCm = 8.5;
-constexpr double kTooFarVeryStrongLowCm = 8.5;
-constexpr double kTooFarVeryStrongHighCm = 12.0;
-
-} // namespace config
-} // namespace maze
+    }
+}

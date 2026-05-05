@@ -29,7 +29,7 @@ void MazeSolver::update() {
     turned_ = true;
     insideMode_ = true;
     islandEntryChecksRemaining_ = 2;
-    delay(config::kPauseIslandSettleMs);
+    delay(config::kPauseIslandSettle);
   }
 
   const uint8_t front = hardware.readFrontLine();
@@ -108,18 +108,18 @@ void MazeSolver::islandMovement(uint8_t front, double rightDistanceCm, bool righ
 }
 
 void MazeSolver::applyWallFollowAdjustment(double rightDistanceCm) {
-  if (rightDistanceCm <= config::kTooCloseStrongCm) {
+  if (rightDistanceCm <= config::kCloseStrongCm) {
     drive.adjustLeftStrong();
-  } else if (rightDistanceCm <= config::kTooCloseLightCm) {
+  } else if (rightDistanceCm <= config::kCloseLightCm) {
     drive.adjustLeft();
-  } else if (rightDistanceCm >= config::kTooFarLightLowCm &&
-             rightDistanceCm <= config::kTooFarLightHighCm) {
+  } else if (rightDistanceCm >= config::kFarLightLowCm &&
+             rightDistanceCm <= config::kFarLightHighCm) {
     drive.adjustRight();
-  } else if (rightDistanceCm > config::kTooFarStrongLowCm &&
-             rightDistanceCm <= config::kTooFarStrongHighCm) {
+  } else if (rightDistanceCm > config::kFarStrongLowCm &&
+             rightDistanceCm <= config::kFarStrongHighCm) {
     drive.adjustRightStrong();
-  } else if (rightDistanceCm > config::kTooFarVeryStrongLowCm &&
-             rightDistanceCm <= config::kTooFarVeryStrongHighCm) {
+  } else if (rightDistanceCm > config::kFarVeryStrongLowCm &&
+             rightDistanceCm <= config::kFarVeryStrongHighCm) {
     drive.adjustRightVeryStrong();
   } else {
     drive.moveForward();
@@ -127,11 +127,11 @@ void MazeSolver::applyWallFollowAdjustment(double rightDistanceCm) {
 }
 
 void MazeSolver::applyIslandEntryStabilization(double rightDistanceCm) {
-  if (rightDistanceCm <= config::kTooCloseStrongCm) {
+  if (rightDistanceCm <= config::kCloseStrongCm) {
     drive.adjustLeftStrong();
-  } else if (rightDistanceCm <= config::kTooCloseLightCm) {
+  } else if (rightDistanceCm <= config::kCloseLightCm) {
     drive.adjustLeft();
-  } else if (rightDistanceCm > config::kTooFarStrongLowCm) {
+  } else if (rightDistanceCm > config::kFarStrongLowCm) {
     drive.adjustRightStrong();
   } else {
     drive.moveForward();
@@ -139,7 +139,7 @@ void MazeSolver::applyIslandEntryStabilization(double rightDistanceCm) {
 }
 
 bool MazeSolver::shouldAggressiveIslandRecentering(double rightDistanceCm) const {
-  return rightDistanceCm > config::kTooFarVeryStrongLowCm;
+  return rightDistanceCm > config::kFarVeryStrongLowCm;
 }
 
 void MazeSolver::markCompleted() {

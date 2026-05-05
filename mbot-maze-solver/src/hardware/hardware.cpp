@@ -73,8 +73,8 @@ namespace maze
   // Determine if the right side is considered blocked by distance thresholds.
   bool RobotHardware::isRightBlocked(double rightDistanceCm) const
   {
-    return rightDistanceCm > config::kRightBlockedMinCm &&
-           rightDistanceCm < config::kRightBlockedMaxCm;
+    return rightDistanceCm > config::kRightMinCm &&
+             rightDistanceCm < config::kRightMaxCm;
   }
 
   // Set RGB status LED color and show immediately.
