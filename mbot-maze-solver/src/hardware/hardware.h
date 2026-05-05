@@ -4,6 +4,8 @@
 
 namespace maze {
 
+// Abstraction for robot hardware: motor control, sensors, and RGB status LED.
+// Provides a simple interface used by motion and algorithm layers.
 class RobotHardware {
 public:
   RobotHardware();
@@ -30,4 +32,4 @@ private:
   Impl *impl;
 };
 
-} // namespace maze
+}
