@@ -28,9 +28,6 @@ def main() -> None:
 
         mission = MazeMission(tello)
 
-        if not mission.preflight_check():
-            raise RuntimeError("Preflight check failed.")
-
         print("Waiting for solid green LED detection...")
 
         while True:

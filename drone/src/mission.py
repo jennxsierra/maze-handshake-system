@@ -1,10 +1,8 @@
 import time
 
 from config import (
-    SAFE_BATTERY_MIN,
     ASCEND_CM,
     FORWARD_TO_MAZE_CM,
-    LANDING_APPROACH_CM,
     FLIP_DIRECTION,
     COMMAND_DELAY,
 )
@@ -18,21 +16,6 @@ class MazeMission:
 
     def __init__(self, tello: TelloClient) -> None:
         self.tello = tello
-
-    def preflight_check(self) -> bool:
-        battery_response = self.tello.battery()
-        if battery_response is None:
-            print("Could not read battery level.")
-            return False
-
-        try:
-            battery_level = int(battery_response)
-        except ValueError:
-            print(f"Unexpected battery response: {battery_response}")
-            return False
-
-        print(f"Battery: {battery_level}%")
-        return battery_level >= SAFE_BATTERY_MIN
 
     def execute(self) -> None:
         """
@@ -55,12 +38,6 @@ class MazeMission:
         print(
             f"Forward {FORWARD_TO_MAZE_CM} cm:",
             self.tello.forward(FORWARD_TO_MAZE_CM),
-        )
-        time.sleep(COMMAND_DELAY)
-
-        print(
-            f"Final approach {LANDING_APPROACH_CM} cm:",
-            self.tello.forward(LANDING_APPROACH_CM),
         )
         time.sleep(COMMAND_DELAY)
 
