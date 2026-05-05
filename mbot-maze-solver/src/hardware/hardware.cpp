@@ -1,8 +1,8 @@
-#include "maze/hardware.h"
+#include "hardware/hardware.h"
 
 #include <MeMegaPi.h>
 
-#include "maze/config.h"
+#include "config/config.h"
 
 namespace maze {
 

@@ -2,10 +2,11 @@
 
 #include <Arduino.h>
 
-#include "maze/hardware.h"
+#include "hardware/hardware.h"
 
 namespace maze {
 
+// Handles autonomous maze-solving movements (forward, turning, wall-following adjustments).
 class DriveBase {
 public:
   explicit DriveBase(RobotHardware &hardware);
@@ -22,7 +23,6 @@ public:
   void readjustRightwards();
   void readjustRightwardsStrong();
   void readjustRightwardsVeryStrong();
-  
 
 private:
   void runTurnSequence(unsigned long turnDelayMs, unsigned long spinDelayMs);
@@ -30,4 +30,4 @@ private:
   RobotHardware &hardware;
 };
 
-} // namespace maze
+}

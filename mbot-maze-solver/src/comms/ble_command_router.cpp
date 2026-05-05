@@ -1,4 +1,4 @@
-#include "maze/ble_command_router.h"
+#include "comms/ble_command_router.h"
 
 namespace maze {
 

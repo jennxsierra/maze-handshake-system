@@ -1,4 +1,4 @@
-#include "maze/serial_command_router.h"
+#include "comms/serial_command_router.h"
 
 namespace maze {
 

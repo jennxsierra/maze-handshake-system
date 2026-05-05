@@ -1,6 +1,5 @@
-#include "maze/solver.h"
-
-#include "maze/config.h"
+#include "algorithm/solver.h"
+#include "config/config.h"
 
 namespace maze {
 

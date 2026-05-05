@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include "maze/drive.h"
+#include "motion/drive.h"
 
 namespace maze {
 

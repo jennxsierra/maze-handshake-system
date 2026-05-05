@@ -2,10 +2,10 @@
 
 #include <Arduino.h>
 
-#include "maze/drive.h"
-#include "maze/hardware.h"
-#include "maze/solver.h"
-#include "maze/manual_controller.h"
+#include "motion/drive.h"
+#include "hardware/hardware.h"
+#include "algorithm/solver.h"
+#include "motion/manual_controller.h"
 
 namespace maze {
 

@@ -2,11 +2,12 @@
 
 #include <Arduino.h>
 
-#include "maze/hardware.h"
-#include "maze/config.h"
+#include "hardware/hardware.h"
+#include "config/config.h"
 
 namespace maze {
 
+// Handles manual motor control via gamepad/keyboard input for testing and debugging.
 class ManualController {
 public:
   explicit ManualController(RobotHardware &hardware);
@@ -25,4 +26,4 @@ private:
   RobotHardware &hardware;
 };
 
-} // namespace maze
+}

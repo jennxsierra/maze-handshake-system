@@ -1,11 +1,11 @@
 #include <Arduino.h>
 
-#include "maze/ble_command_router.h"
-#include "maze/command_parser.h"
-#include "maze/drive.h"
-#include "maze/hardware.h"
-#include "maze/serial_command_router.h"
-#include "maze/solver.h"
+#include "comms/ble_command_router.h"
+#include "comms/command_parser.h"
+#include "motion/drive.h"
+#include "hardware/hardware.h"
+#include "comms/serial_command_router.h"
+#include "algorithm/solver.h"
 
 namespace {
 
