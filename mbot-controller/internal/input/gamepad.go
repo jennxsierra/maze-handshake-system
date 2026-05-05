@@ -73,10 +73,6 @@ func (g *GamepadPad) Start(out chan<- byte) {
 					if e.State == sdl.PRESSED {
 						out <- commands.Registry['A'].Code
 					}
-				case "misc1":
-					if e.State == sdl.PRESSED {
-						out <- commands.Registry['I'].Code
-					}
 				case "back":
 					if e.State == sdl.PRESSED {
 						out <- commands.Registry['M'].Code
