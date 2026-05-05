@@ -4,16 +4,17 @@
 
 #include "comms/command_parser.h"
 
-namespace maze {
+namespace maze
+{
+  // Reads incoming bytes from USB serial and forwards characters to the command parser.
+  class SerialCommandRouter
+  {
+  public:
+    explicit SerialCommandRouter(CommandParser &parser);
 
-class SerialCommandRouter {
-public:
-  explicit SerialCommandRouter(CommandParser &parser);
+    void update();
 
-  void update();
-
-private:
-  CommandParser &parser;
-};
-
-} // namespace maze
+  private:
+    CommandParser &parser;
+  };
+}

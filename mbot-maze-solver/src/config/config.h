@@ -1,5 +1,7 @@
 #pragma once
 
+// Project-wide configuration values used by motion and algorithm modules.
+// Units: speeds in motor units, distances in centimeters, pauses in ms.
 namespace maze
 {
     namespace config
