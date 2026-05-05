@@ -7,7 +7,7 @@ namespace maze
     namespace config
     {
         // Core drive settings
-        constexpr int kSpeed = 60; // base motor speed
+        constexpr int kSpeed = 65; // base motor speed
 
         // Timing (milliseconds)
         constexpr unsigned long kPauseShort = 50;           // short, per-action pause
@@ -22,17 +22,20 @@ namespace maze
 
         // Right-side distance thresholds (cm)
         constexpr double kRightMinCm = 2.0;  // sensor min considered
-        constexpr double kRightMaxCm = 12.0; // sensor max considered for blocked
+        constexpr double kRightMaxCm = 15.0; // sensor max considered for blocked
 
         // Wall-following distance bands (cm)
-        constexpr double kCloseStrongCm = 4.5;        // too close (strong adjust)
+        constexpr double kCloseStrongCm = 3.5;        // too close (strong adjust)
         constexpr double kCloseLightCm = 5.0;         // slightly close (light adjust)
-        constexpr double kFarLightLowCm = 5.5;        // slightly far lower bound
-        constexpr double kFarLightHighCm = 7.0;       // slightly far upper bound
-        constexpr double kFarStrongLowCm = 7.0;       // far strong lower bound
+        constexpr double kFarLightLowCm = 6.25;       // slightly far lower bound
+        constexpr double kFarLightHighCm = 7.5;       // slightly far upper bound
+        constexpr double kFarStrongLowCm = 7.5;       // far strong lower bound
         constexpr double kFarStrongHighCm = 8.5;      // far strong upper bound
         constexpr double kFarVeryStrongLowCm = 8.5;   // very far lower bound
-        constexpr double kFarVeryStrongHighCm = 12.0; // very far upper bound
+        constexpr double kFarVeryStrongHighCm = 15.0; // very far upper bound
+
+        // Sensor sentinel value present in sample (e.g. 400). Solver not yet using this.
+        constexpr int kRightInvalidReading = 400;
 
     }
 }

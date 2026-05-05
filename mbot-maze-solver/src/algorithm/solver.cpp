@@ -44,7 +44,8 @@ namespace maze
     // Read all sensors.
     const uint8_t front = hardware.readFrontLine();
     const double rightDistanceCm = hardware.readRightDistanceCm();
-    const bool rightBlocked = hardware.isRightBlocked(rightDistanceCm);
+    const bool rightInvalid = (static_cast<int>(rightDistanceCm) == config::kRightInvalidReading);
+    const bool rightBlocked = hardware.isRightBlocked(rightDistanceCm) || rightInvalid;
 
     // Dispatch to appropriate movement handler.
     if (!insideMode_)
@@ -153,6 +154,12 @@ namespace maze
   // Adjust motion based on right-wall distance: keep robot parallel to wall.
   void MazeSolver::applyWallFollowAdjustment(double rightDistanceCm)
   {
+    // Treat sensor sentinel as "invalid/too-close" and force strong left.
+    if (static_cast<int>(rightDistanceCm) == config::kRightInvalidReading)
+    {
+      drive.adjustLeftStrong();
+      return;
+    }
     // Too close to right wall: push left.
     if (rightDistanceCm <= config::kCloseStrongCm)
     {
@@ -190,6 +197,12 @@ namespace maze
   // During island entry, apply conservative adjustments to find and stabilize on right wall.
   void MazeSolver::applyIslandEntryStabilization(double rightDistanceCm)
   {
+    // Treat sentinel as invalid -> strong left to reorient.
+    if (static_cast<int>(rightDistanceCm) == config::kRightInvalidReading)
+    {
+      drive.adjustLeftStrong();
+      return;
+    }
     // Too close: push left.
     if (rightDistanceCm <= config::kCloseStrongCm)
     {
