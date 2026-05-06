@@ -38,8 +38,8 @@ namespace maze
   void DriveBase::moveRight()
   {
     Serial.println("[MOTOR] MOVE RIGHT");
-    hardware.runLeftMotor(config::kSpeed * 3);
-    hardware.runRightMotor(-config::kSpeed);
+    hardware.runLeftMotor(config::kSpeed * 4.75);
+    hardware.runRightMotor(-config::kSpeed * 0.8);
   }
 
   // Performs 90° right turn (mirrored left turn).
@@ -95,8 +95,8 @@ namespace maze
     delay(config::kPauseShort);
 
     // Spin to complete turn.
-    hardware.runLeftMotor(-config::kSpeed * 3.5);
-    hardware.runRightMotor(-config::kSpeed * 3.5);
+    hardware.runLeftMotor(-config::kSpeed * 3.75);
+    hardware.runRightMotor(-config::kSpeed * 3.75);
     delay(spinDelayMs);
 
     stop();

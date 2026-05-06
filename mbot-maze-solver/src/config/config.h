@@ -7,14 +7,14 @@ namespace maze
     namespace config
     {
         // Core drive settings
-        constexpr int kSpeed = 65; // base motor speed
+        constexpr int kSpeed = 67; // base motor speed
 
         // Timing (milliseconds)
         constexpr unsigned long kPauseShort = 50;           // short, per-action pause
-        constexpr unsigned long kPauseTurn = 210;           // initial turn duration
-        constexpr unsigned long kPauseSpin = 250;           // spin to complete turn
-        constexpr unsigned long kPauseTurnAroundTurn = 220; // turnaround initial turn
-        constexpr unsigned long kPauseTurnAroundSpin = 260; // turnaround spin
+        constexpr unsigned long kPauseTurn = 245;           // initial turn duration
+        constexpr unsigned long kPauseSpin = 285;           // spin to complete turn
+        constexpr unsigned long kPauseTurnAroundTurn = 260; // turnaround initial turn
+        constexpr unsigned long kPauseTurnAroundSpin = 300; // turnaround spin
         constexpr unsigned long kPauseMedium = 100;         // medium pause
         constexpr unsigned long kPauseLong = 150;           // long pause
         constexpr unsigned long kPauseIslandEntry = 800;    // wait after island entry
@@ -27,12 +27,12 @@ namespace maze
         // Wall-following distance bands (cm)
         constexpr double kCloseStrongCm = 3.5;        // too close (strong adjust)
         constexpr double kCloseLightCm = 5.0;         // slightly close (light adjust)
-        constexpr double kFarLightLowCm = 6.25;       // slightly far lower bound
-        constexpr double kFarLightHighCm = 7.5;       // slightly far upper bound
-        constexpr double kFarStrongLowCm = 7.5;       // far strong lower bound
-        constexpr double kFarStrongHighCm = 8.5;      // far strong upper bound
-        constexpr double kFarVeryStrongLowCm = 8.5;   // very far lower bound
-        constexpr double kFarVeryStrongHighCm = 15.0; // very far upper bound
+        constexpr double kFarLightLowCm = 5.75;       // slightly far lower bound
+        constexpr double kFarLightHighCm = 6.75;      // slightly far upper bound
+        constexpr double kFarStrongLowCm = 6.75;      // far strong lower bound
+        constexpr double kFarStrongHighCm = 7.75;     // far strong upper bound
+        constexpr double kFarVeryStrongLowCm = 7.75;  // very far lower bound
+        constexpr double kFarVeryStrongHighCm = 14.0; // very far upper bound
 
         // Sensor sentinel value present in sample (e.g. 400). Solver not yet using this.
         constexpr int kRightInvalidReading = 400;
